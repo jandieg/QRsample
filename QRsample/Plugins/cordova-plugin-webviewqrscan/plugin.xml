@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-webviewqrscan" version="1.0.0">
+
+    <name>WebView QRCode Scan</name>
+    <description></description>
+
+    <engines>
+        <engine name="cordova" version=">=3.8.0" />
+    </engines>
+
+    <js-module src="www/WVQRScan.js" name="WVQRScan">
+        <clobbers target="WVQRScan" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+			<feature name="WVQRScan">
+				<param name="android-package" value="com.rener.wvqrscan.WVQRScanManager" />
+			</feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.CAMERA" />
+        </config-file>
+
+		<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+		
+		<!-- sources -->
+        <source-file src="src/android/CameraPreview.java" target-dir="src/com/rener/wvqrscan" />
+		<source-file src="src/android/WVQRScanManager.java" target-dir="src/com/rener/wvqrscan" />
+        <source-file src="src/android/ZBarScannerActivity.java" target-dir="src/com/rener/wvqrscan" />
+		
+		<!-- resources -->
+        <source-file src="src/android/qrscan_camera.xml" target-dir="res/layout" />
+    </platform>
+    
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="WVQRScan">
+                <param name="ios-package" value="CDVWVQRScan" />
+            </feature>
+        </config-file>
+        
+        <!-- frameworks -->
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="libiconv.dylib" />
+        
+        <!-- sources -->
+        <source-file src="src/libzbar.a" framework="true" custom="true"/>
+        
+        <header-file src="src/ios/CDVWVQRScan.h" />
+        <source-file src="src/ios/CDVWVQRScan.m" />
+        <header-file src="src/ios/ZBarScanViewController.h" />
+        <source-file src="src/ios/ZBarScanViewController.m" />
+        
+        <header-file src="src/ZBarSDK/ZBarCameraSimulator.h" />
+        <header-file src="src/ZBarSDK/ZBarCaptureReader.h" />
+        <header-file src="src/ZBarSDK/ZBarHelpController.h" />
+        <header-file src="src/ZBarSDK/ZBarImage.h" />
+        <header-file src="src/ZBarSDK/ZBarImageScanner.h" />
+        <header-file src="src/ZBarSDK/ZBarReaderController.h" />
+        <header-file src="src/ZBarSDK/ZBarReaderView.h" />
+        <header-file src="src/ZBarSDK/ZBarReaderViewController.h" />
+        <header-file src="src/ZBarSDK/ZBarSDK.h" />
+        <header-file src="src/ZBarSDK/ZBarSymbol.h" />
+        <header-file src="src/ZBarSDK/zbar.h" />
+        <header-file src="src/ZBarSDK/zbar/Decoder.h" />
+        <header-file src="src/ZBarSDK/zbar/Exception.h" />
+        <header-file src="src/ZBarSDK/zbar/Image.h" />
+        <header-file src="src/ZBarSDK/zbar/ImageScanner.h" />
+        <header-file src="src/ZBarSDK/zbar/Processor.h" />
+        <header-file src="src/ZBarSDK/zbar/Scanner.h" />
+        <header-file src="src/ZBarSDK/zbar/Symbol.h" />
+        <header-file src="src/ZBarSDK/zbar/Video.h" />
+        <header-file src="src/ZBarSDK/zbar/Window.h" />
+        
+    </platform>
+
+</plugin>
